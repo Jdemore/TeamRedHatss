@@ -14,18 +14,18 @@ public class collision : MonoBehaviour
             if (other.gameObject.tag == "correct")
             {
                 Debug.Log("Correct");
-                // add health, move on
-                pointSystem.getPoints();    // increase points
+                pointSystem.getPoints();
 
                 Debug.Log("Points: " + pointSystem.points);
                 Debug.Log("Lives: " + pointSystem.lives);
-                manager.GenerateQuestion();
 
+                manager.ShowAnswerFeedback(other.gameObject, true);
+                manager.GenerateQuestion();
             }
             else if (other.gameObject.tag == "incorrect")
             {
                 Debug.Log("Incorrect");
-                pointSystem.loseLife(); // decrease lives
+                pointSystem.loseLife();
                 if (pointSystem.lives == 0)
                 {
                     pointSystem.lives = 0;
@@ -34,6 +34,7 @@ public class collision : MonoBehaviour
                 Debug.Log("Points: " + pointSystem.points);
                 Debug.Log("Lives: " + pointSystem.lives);
 
+                manager.ShowAnswerFeedback(other.gameObject, false);
             }
         }
         detect = false;
