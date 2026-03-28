@@ -52,6 +52,59 @@ Six custom skills are installed in `.claude/skills/`. Each skill has a `SKILL.md
 - Pool all runtime objects -- no Instantiate/Destroy during gameplay
 - Haptic feedback on every successful hit
 
+## Project Toolkit (`Assets/_pWork/Joe/`)
+
+### Logging (`Logs/`)
+
+**Always use `Console` and `Debugger` instead of `UnityEngine.Debug.Log` directly.** All log calls are automatically stripped from release builds via `[Conditional]` attributes.
+
+#### `Console` -- Static logging utility
+```csharp
+Console.Log("Player spawned");                    // basic log
+Console.Log("Damage dealt: 50", "Combat");        // with category tag for filtering
+Console.Warn("Low memory", context: this);        // warning with context object
+Console.Err("Failed to load", "Audio");           // error with category
+Console.Assert(hp > 0, "HP should be positive");  // conditional error
+```
+
+#### `Debugger` -- Base class with per-instance toggle
+Inherit from `Debugger` instead of `MonoBehaviour` when you want an Inspector toggle (`_enableLogs`) for per-component debug logging:
+```csharp
+public class EnemyAI : Debugger
+{
+    protected override string LogCategory => "AI";
+    private void Start() => Log("EnemyAI initialized");
+}
+```
+
+### Scene Management (`SceneMgmt/`)
+
+**Always use `SceneMgmt.Manager` for scene loading instead of `UnityEngine.SceneManagement.SceneManager` directly.** It provides validation and a cleaner API.
+
+#### `SceneMgmt.Manager` -- Static scene loading API
+```csharp
+SceneMgmt.Manager.LoadByName("MainMenu");           // load by name
+SceneMgmt.Manager.LoadByIndex(2);                    // load by build index
+SceneMgmt.Manager.LoadNext();                        // next scene (wraps to 0)
+SceneMgmt.Manager.LoadPrevious();                    // previous scene (wraps to end)
+SceneMgmt.Manager.LoadAsyncByName("Gameplay");       // async load
+SceneMgmt.Manager.LoadAdditiveByName("UI_Overlay");  // additive load
+SceneMgmt.Manager.Unload("UI_Overlay");              // unload additive scene
+SceneMgmt.Manager.LoadWithLoadingScene("Gameplay", "_InitLoading"); // load via loading screen
+```
+
+#### `Loader` -- MonoBehaviour wrapper for Inspector/UnityEvent use
+Attach to a button or trigger. Configure `LoadMode` (Next, Previous, ByIndex, ByName) and call `Load()` from UnityEvents.
+
+#### `Bootstrapper` -- Boot scene initializer (`Toolkit.Core` namespace)
+Place in build index 0 "Boot" scene. Spawns persistent manager prefabs (`DontDestroyOnLoad`), shows a loading screen with fade, then loads the start scene.
+
+#### `LoadingScreenFade` -- CanvasGroup fade singleton
+Provides `FadeIn()` / `FadeOut()` coroutines. Used by `Bootstrapper`.
+
+#### `QuitGame` -- Quit helper
+Call `Quit()` from UnityEvents. Handles Editor vs build quit correctly.
+
 ## Theme Quick Reference
 
 - Aesthetic: Primal materials (stone, bone, hide) with glowing energy circuits
