@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem; // for new Input System
+using UnityEngine.InputSystem;
 
 public class DictionaryManager : MonoBehaviour
 {
@@ -12,13 +12,15 @@ public class DictionaryManager : MonoBehaviour
     private string romaji;
 
     [SerializeField] private TextMeshProUGUI toFind;
-    [SerializeField] private TextMeshProUGUI[] textMeshProUGUIs = null;
-    [SerializeField] private Transform boxesParent = null;
 
-    private void Awake()
-    {
-        FillTextArray();
-    }
+    [Header("Choice Spawning")]
+    [SerializeField] private GameObject _choicePrefab;
+    [SerializeField] private int _choiceCount = 4;
+
+    [Header("Answer Animation")]
+    [SerializeField] private AnswerLerpManager _lerpManager;
+
+    private readonly List<GameObject> _activeChoices = new List<GameObject>();
 
     private void Start()
     {
@@ -33,64 +35,73 @@ public class DictionaryManager : MonoBehaviour
         GenerateQuestion();
     }
 
-    private void FillTextArray()
-    {
-        List<TextMeshProUGUI> texts = new List<TextMeshProUGUI>();
-
-        foreach (Transform box in boxesParent)
-        {
-            TextMeshProUGUI tmp = box.GetComponentInChildren<TextMeshProUGUI>();
-            if (tmp != null)
-            {
-                texts.Add(tmp);
-            }
-        }
-
-        textMeshProUGUIs = texts.ToArray();
-    }
-
     public void GenerateQuestion()
     {
-        PickRandomKana();
+        // Destroy leftover choices (hit choice is already removed from this list)
+        for (int i = _activeChoices.Count - 1; i >= 0; i--)
+        {
+            if (_activeChoices[i] != null)
+                Destroy(_activeChoices[i]);
+        }
+        _activeChoices.Clear();
 
-        // Show the romaji the player needs to find
+        PickRandomKana();
         toFind.text = romaji;
 
         // Build answer choices
-        List<string> answerChoices = new List<string>();
-        answerChoices.Add(randomKana); // correct answer
+        List<string> answerChoices = new List<string> { randomKana };
 
-        // Add wrong answers
         List<string> availableKana = new List<string>(kanaKeys);
         availableKana.Remove(randomKana);
 
-        while (answerChoices.Count < textMeshProUGUIs.Length && availableKana.Count > 0)
+        while (answerChoices.Count < _choiceCount && availableKana.Count > 0)
         {
             int randomIndex = Random.Range(0, availableKana.Count);
             answerChoices.Add(availableKana[randomIndex]);
             availableKana.RemoveAt(randomIndex);
         }
 
-        // Shuffle answer choices
         ShuffleList(answerChoices);
 
-        // Assign to text boxes
-        //for (int i = 0; i < textMeshProUGUIs.Length; i++)
-        //{
-        //    textMeshProUGUIs[i].text = answerChoices[i];
-        //}
+        // Spawn prefabs and configure
+        Transform[] boxes = new Transform[answerChoices.Count];
 
-
-        for (int i = 0; i < textMeshProUGUIs.Length; i++)
+        for (int i = 0; i < answerChoices.Count; i++)
         {
-            textMeshProUGUIs[i].text = answerChoices[i];
+            GameObject choice = Instantiate(_choicePrefab);
+            _activeChoices.Add(choice);
 
-            // Assign tag to the box parent
-            if (answerChoices[i] == randomKana)
-                textMeshProUGUIs[i].transform.parent.parent.gameObject.tag = "correct";
-            else
-                textMeshProUGUIs[i].transform.parent.parent.gameObject.tag = "incorrect";
+            // Set answer text (prefab structure: Choice > Canvas > Image > Text (TMP))
+            TextMeshProUGUI tmp = choice.GetComponentInChildren<TextMeshProUGUI>();
+            if (tmp != null)
+                tmp.text = answerChoices[i];
+
+            // Tag the root object for collision detection
+            choice.tag = answerChoices[i] == randomKana ? "correct" : "incorrect";
+
+            boxes[i] = choice.transform;
         }
+
+        // Animate from start points to end points
+        if (_lerpManager != null)
+            _lerpManager.AnimateAnswers(boxes);
+    }
+
+    /// <summary>
+    /// Call from collision to flash the hit answer green/red.
+    /// The hit choice is removed from the active list so it survives
+    /// the next GenerateQuestion call, then self-destructs after the flash.
+    /// </summary>
+    public void ShowAnswerFeedback(GameObject hitChoice, bool isCorrect)
+    {
+        if (_lerpManager == null) return;
+
+        // Pull it out so GenerateQuestion won't destroy it mid-flash
+        _activeChoices.Remove(hitChoice);
+
+        TextMeshProUGUI hitText = hitChoice.GetComponentInChildren<TextMeshProUGUI>();
+        if (hitText != null)
+            _lerpManager.ShowFeedback(hitText, isCorrect, hitChoice);
     }
 
     private void PickRandomKana()
@@ -108,13 +119,10 @@ public class DictionaryManager : MonoBehaviour
         for (int i = 0; i < list.Count; i++)
         {
             int randomIndex = Random.Range(i, list.Count);
-            string temp = list[i];
-            list[i] = list[randomIndex];
-            list[randomIndex] = temp;
+            (list[i], list[randomIndex]) = (list[randomIndex], list[i]);
         }
     }
 
-    // Optional: generate new question with key press (new Input System)
     private void Update()
     {
         if (Keyboard.current.pKey.wasPressedThisFrame)
