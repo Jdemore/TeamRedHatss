@@ -1,59 +1,77 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class collision : MonoBehaviour
 {
     public PointSystem pointSystem;
     public DictionaryManager manager;
 
-    public bool detect = true;
+    public AudioManager audioManager;
+    public SphereCollider sphereCol;
 
-    void OnTriggerEnter(Collider other) 
+    [SerializeField] private float hitCooldown = 1.0f;
+    private bool canHit = true;
+
+    private void Start()
     {
-        if (detect)
+        if (sphereCol == null)
+            sphereCol = GetComponent<SphereCollider>();
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (!canHit) return;
+
+        if (other.CompareTag("correct"))
         {
-            if (other.gameObject.tag == "correct")
-            {
-                Debug.Log("Correct");
-                pointSystem.getPoints();
+            canHit = false;
 
-                Debug.Log("Points: " + pointSystem.points);
-                Debug.Log("Lives: " + pointSystem.lives);
+            audioManager.PlayCorrect();
 
-                manager.ShowAnswerFeedback(other.gameObject, true);
-                manager.GenerateQuestion();
-            }
-            else if (other.gameObject.tag == "incorrect")
-            {
-                Debug.Log("Incorrect");
-                pointSystem.loseLife();
-                if (pointSystem.lives == 0)
-                {
-                    pointSystem.lives = 0;
-                }
+            Debug.Log("Correct");
+            pointSystem.getPoints();
 
-                Debug.Log("Points: " + pointSystem.points);
-                Debug.Log("Lives: " + pointSystem.lives);
+            Debug.Log("Points: " + pointSystem.points);
+            Debug.Log("Lives: " + pointSystem.lives);
 
-                manager.ShowAnswerFeedback(other.gameObject, false);
-            }
+            manager.ShowAnswerFeedback(other.gameObject, true);
+            manager.GenerateQuestion();
+
+            StartCoroutine(DisableColliderTemporarily());
         }
-        detect = false;
+        else if (other.CompareTag("incorrect"))
+        {
+            canHit = false;
+
+            audioManager.PlayIncorrect();
+
+            Debug.Log("Incorrect");
+            pointSystem.loseLife();
+
+            if (pointSystem.lives < 0)
+                pointSystem.lives = 0;
+
+            Debug.Log("Points: " + pointSystem.points);
+            Debug.Log("Lives: " + pointSystem.lives);
+
+            manager.ShowAnswerFeedback(other.gameObject, false);
+            manager.GenerateQuestion();
+
+            StartCoroutine(DisableColliderTemporarily());
+        }
     }
 
-    private void OnTriggerExit()
+    private IEnumerator DisableColliderTemporarily()
     {
-        detect = true;
-    }
+        if (sphereCol != null)
+            sphereCol.enabled = false;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+        yield return new WaitForSeconds(hitCooldown);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (sphereCol != null)
+            sphereCol.enabled = true;
+
+        canHit = true;
     }
 }
