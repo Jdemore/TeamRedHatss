@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/Boostrapped.meta
+guid: 140558ebc3af95f40abcf99ce1b1a11b
+folderAsset: yes
+DefaultImporter:
+========
 guid: e7cfd066646240a468698868d29d4fde
 NativeFormatImporter:
+>>>>>>>> main:Assets/Materials/Box 1.mat.meta
   externalObjects: {}
   mainObjectFileID: 2100000
   userData: 
