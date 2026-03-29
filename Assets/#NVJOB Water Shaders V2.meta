@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/TextMesh Pro/Examples & Extras.meta
+guid: 94750c67df7a310458a47606f06f3595
+========
 guid: 1ce6c96e9ccad5f4f8aae5e6c0dc8617
+>>>>>>>> main:Assets/#NVJOB Water Shaders V2.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
