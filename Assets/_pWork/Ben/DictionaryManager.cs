@@ -36,6 +36,18 @@ public class DictionaryManager : MonoBehaviour
     /// <summary>Seconds elapsed since the current question was shown.</summary>
     public float ResponseTime => Time.time - _questionStartTime;
 
+    private string _pinnedKana;
+
+    /// <summary>
+    /// Pin a specific kana as the correct answer for all subsequent questions
+    /// until cleared. Distractors are still randomized from the pool.
+    /// Pass null to return to random selection.
+    /// </summary>
+    public void PinCorrectAnswer(string kana)
+    {
+        _pinnedKana = kana;
+    }
+
     private void Start()
     {
         // If coming from tier select in Gameplay mode, use that tier
@@ -173,8 +185,16 @@ public class DictionaryManager : MonoBehaviour
 
     private void PickRandomKana()
     {
-        int randomIndex = Random.Range(0, kanaKeys.Count);
-        randomKana = kanaKeys[randomIndex];
+        if (!string.IsNullOrEmpty(_pinnedKana) && kanaLib.ContainsKey(_pinnedKana))
+        {
+            randomKana = _pinnedKana;
+        }
+        else
+        {
+            int randomIndex = Random.Range(0, kanaKeys.Count);
+            randomKana = kanaKeys[randomIndex];
+        }
+
         romaji = kanaLib[randomKana];
 
         Debug.Log("Kana: " + randomKana);

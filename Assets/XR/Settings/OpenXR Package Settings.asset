@@ -348,7 +348,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12d3bf61b014a48a2b7564c61da9d7ad, type: 3}
-  m_Name: AndroidXRPerformanceMetrics Standalone
+  m_Name: AndroidXRPerformanceMetrics Android
   m_EditorClassIdentifier: Unity.XR.AndroidOpenXR::UnityEngine.XR.OpenXR.Features.Android.AndroidXRPerformanceMetrics
   m_enabled: 0
   nameUi: Android XR Performance Metrics
@@ -482,7 +482,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c36843bac48b29469f79baf3c98f9b6, type: 3}
-  m_Name: AndroidXRHandMeshData Standalone
+  m_Name: AndroidXRHandMeshData Android
   m_EditorClassIdentifier: Unity.XR.AndroidOpenXR::UnityEngine.XR.OpenXR.Features.Android.AndroidXRHandMeshData
   m_enabled: 0
   nameUi: 'Android XR: Hand Mesh Data'
@@ -551,7 +551,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90ae1e8c3c7a542bba339faf2e771c5a, type: 3}
-  m_Name: AndroidXRSupportFeature Standalone
+  m_Name: AndroidXRSupportFeature Android
   m_EditorClassIdentifier: Unity.XR.AndroidOpenXR::UnityEngine.XR.OpenXR.Features.Android.AndroidXRSupportFeature
   m_enabled: 0
   nameUi: Android XR Support
@@ -2268,8 +2268,8 @@ MonoBehaviour:
   features:
   - {fileID: -4591610924584415979}
   - {fileID: -2427618949604763575}
-  - {fileID: -6389695543822989398}
-  - {fileID: -3100632832563968777}
+  - {fileID: -6323158860370883143}
+  - {fileID: -4985132809754201078}
   - {fileID: -2244500458555447915}
   - {fileID: 458889496163616462}
   - {fileID: 9222209817077908991}
@@ -2280,7 +2280,7 @@ MonoBehaviour:
   - {fileID: 7873613494412960659}
   - {fileID: 349731175285800775}
   - {fileID: 9008226927992869190}
-  - {fileID: -3898188470186324876}
+  - {fileID: -5385104918316153103}
   - {fileID: -2140740586143700348}
   - {fileID: -2563643688972551681}
   - {fileID: -3318821660083193361}

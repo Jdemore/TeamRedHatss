@@ -97,6 +97,7 @@ public class TutorialManager : MonoBehaviour
             practicePool.Add(_tierEntries[i]);
         }
         _dictionaryManager.LoadEntries(practicePool);
+        _dictionaryManager.PinCorrectAnswer(_tierEntries[_currentCharIndex].kana);
         _dictionaryManager.GenerateQuestion();
     }
 
@@ -142,6 +143,7 @@ public class TutorialManager : MonoBehaviour
     private void CompleteTutorial()
     {
         _tutorialFinished = true;
+        _dictionaryManager.PinCorrectAnswer(null);
         TierProgress.CompleteTier(_tier);
 
         if (_promptText != null)
