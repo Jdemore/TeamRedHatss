@@ -2256,6 +2256,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameOver
   GameOverUI: {fileID: 441395162}
+  pointSystem: {fileID: 1205748099}
+  points: {fileID: 851742943}
+  lives: {fileID: 1108683045}
 --- !u!1 &329674977
 GameObject:
   m_ObjectHideFlags: 0
@@ -7591,7 +7594,7 @@ GameObject:
   - component: {fileID: 851742944}
   - component: {fileID: 851742943}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: points_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9226,7 +9229,7 @@ GameObject:
   - component: {fileID: 1108683046}
   - component: {fileID: 1108683045}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: lives_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9249,7 +9252,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 38.8, y: 3.6}
-  m_SizeDelta: {x: 100, y: 20}
+  m_SizeDelta: {x: 120, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1108683045
 MonoBehaviour:
