@@ -65,7 +65,15 @@ public class collision : MonoBehaviour
                     _tutorialManager.OnIncorrectAnswer();
             }
         }
+        // Re-enable after a short delay since the choice may be destroyed
+        // before OnTriggerExit fires (destroying the collider skips the exit callback)
         detect = false;
+        Invoke(nameof(ResetDetect), 0.2f);
+    }
+
+    private void ResetDetect()
+    {
+        detect = true;
     }
 
     private void RecordStat(bool correct)
