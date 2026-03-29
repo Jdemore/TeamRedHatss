@@ -61,10 +61,11 @@ public class DictionaryManager : MonoBehaviour
 
     private void Start()
     {
-        // If coming from tier select in Gameplay mode, use that tier
-        if (ActiveTierSelection.Mode == ActiveTierSelection.PlayMode.Gameplay)
+        // If coming from difficulty select in Gameplay mode, use the selected flags
+        if (ActiveTierSelection.Mode == ActiveTierSelection.PlayMode.Gameplay
+            && ActiveTierSelection.ActiveFlags != TierFlags.None)
         {
-            LoadTier(ActiveTierSelection.SelectedTier);
+            LoadTiers(ActiveTierSelection.ActiveFlags);
         }
         else if (_includeAllUnlockedTiers)
         {

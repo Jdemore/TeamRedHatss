@@ -57,7 +57,10 @@ public class TutorialManager : MonoBehaviour
         _tutorialFinished = false;
 
         if (_promptText != null)
-            _promptText.text = "Find the correct kana!";
+        {
+            string tierName = KanaDatabase.Tiers[_tier].name;
+            _promptText.text = "Find the correct " + tierName + "!";
+        }
 
         if (_tierNameText != null)
             _tierNameText.text = KanaDatabase.Tiers[_tier].name;
@@ -131,7 +134,10 @@ public class TutorialManager : MonoBehaviour
         TierProgress.CompleteTier(_tier);
 
         if (_promptText != null)
-            _promptText.text = "Tutorial complete! Ready to start Level " + (_tier + 1) + "?";
+        {
+            string tierName = KanaDatabase.Tiers[_tier].name;
+            _promptText.text = tierName + " complete!";
+        }
 
         if (_kanaDisplayText != null)
             _kanaDisplayText.text = "";
