@@ -242,6 +242,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DictionaryManager
   toFind: {fileID: 1075703947551164600}
+  _toFindRoot: {fileID: 1896645196056565162}
   _activeTiers: 1
   _includeAllUnlockedTiers: 0
   _choicePrefab: {fileID: 2996496245990384311, guid: c27e21bf9ec64854ca7d0ba21e5bf125, type: 3}

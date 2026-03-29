@@ -100,9 +100,9 @@ Material:
     - _DoubleSidedNormalMode: 2
     - _Dst1: 10
     - _DstBlend: 1
-    - _EmissionIntensity: 400
-    - _Emissive: 400
-    - _Emissive_Amount: 400
+    - _EmissionIntensity: 200
+    - _Emissive: 200
+    - _Emissive_Amount: 200
     - _EnableFogOnTransparent: 1
     - _Global_Speed: 1
     - _Intensity: 1
