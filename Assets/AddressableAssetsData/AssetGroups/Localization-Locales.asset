@@ -1,3 +1,73 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b5355d187bf01754dcf4ec603558c6897fe7c52e02d9f291072a9196f503d871
-size 2097
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-Locales
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Localization-Locales
+  m_GUID: 4855d6368fa5a024cbc4e155f0403112
+  m_SerializeEntries:
+  - m_GUID: 0c0d1a247c273414f9ae0fe754e90fba
+    m_Address: Japanese (ja)
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale
+    FlaggedDuringContentUpdateRestriction: 0
+    <IsFolder>k__BackingField: 0
+    <BundleFileId>k__BackingField: 
+    <IsSubAsset>k__BackingField: 0
+    m_CheckedIsScene: 1
+    m_IsScene: 0
+    m_CurrentHash:
+      'bytes[0]': 203
+      'bytes[1]': 192
+      'bytes[2]': 233
+      'bytes[3]': 226
+      'bytes[4]': 101
+      'bytes[5]': 49
+      'bytes[6]': 130
+      'bytes[7]': 43
+      'bytes[8]': 2
+      'bytes[9]': 196
+      'bytes[10]': 69
+      'bytes[11]': 173
+      'bytes[12]': 151
+      'bytes[13]': 40
+      'bytes[14]': 186
+      'bytes[15]': 189
+    m_cachedAssetPath: Assets/Japanese (ja).asset
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: 26533f99d9564d149bb5ac8232ef2fd8, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 6e4fc1fcebe1a2c488a5d2ccf2a6bb8f, type: 2}
+    - {fileID: 11400000, guid: 87bfa68ecc84e1c4ba62a120339d1b0d, type: 2}
+  m_FolderEntryCache: []
+  <FlaggedDuringContentUpdateRestriction>k__BackingField: 0
+  m_CurrentHash:
+    'bytes[0]': 87
+    'bytes[1]': 233
+    'bytes[2]': 106
+    'bytes[3]': 136
+    'bytes[4]': 170
+    'bytes[5]': 93
+    'bytes[6]': 247
+    'bytes[7]': 29
+    'bytes[8]': 210
+    'bytes[9]': 37
+    'bytes[10]': 255
+    'bytes[11]': 135
+    'bytes[12]': 247
+    'bytes[13]': 106
+    'bytes[14]': 168
+    'bytes[15]': 192
