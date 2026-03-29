@@ -1,5 +1,5 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 
 public class collision : MonoBehaviour
@@ -7,59 +7,71 @@ public class collision : MonoBehaviour
     public PointSystem pointSystem;
     public DictionaryManager manager;
 
-    public bool detect = true;
+    public AudioManager audioManager;
+    public SphereCollider sphereCol;
 
-    public AudioSource audioSource1;
-
-    void OnTriggerEnter(Collider other) 
-    {
-        if (detect)
-        {
-            if (other.gameObject.tag == "correct")
-            {
-                audioSource1.Play();
-                Debug.Log("Correct");
-                pointSystem.getPoints();
-
-                Debug.Log("Points: " + pointSystem.points);
-                Debug.Log("Lives: " + pointSystem.lives);
-
-                manager.ShowAnswerFeedback(other.gameObject, true);
-                manager.GenerateQuestion();
-            }
-            else if (other.gameObject.tag == "incorrect")
-            {
-                Debug.Log("Incorrect");
-                pointSystem.loseLife();
-                if (pointSystem.lives == 0)
-                {
-                    pointSystem.lives = 0;
-                }
-
-                Debug.Log("Points: " + pointSystem.points);
-                Debug.Log("Lives: " + pointSystem.lives);
-
-                manager.ShowAnswerFeedback(other.gameObject, false);
-            }
-        }
-        detect = false;
-    }
-
-    private void OnTriggerExit()
-    {
-        detect = true;
-    }
+    [SerializeField] private float hitCooldown = 1.0f;
+    private bool canHit = true;
 
     private void Start()
     {
-        //audioSource1 = GetComponent<AudioSource>();
+        if (sphereCol == null)
+            sphereCol = GetComponent<SphereCollider>();
     }
 
-    private void Update()
+    void OnTriggerEnter(Collider other)
     {
-        if (Keyboard.current.sKey.wasPressedThisFrame)
+        if (!canHit) return;
+
+        if (other.CompareTag("correct"))
         {
-            audioSource1.Play();
+            canHit = false;
+
+            audioManager.PlayCorrect();
+
+            Debug.Log("Correct");
+            pointSystem.getPoints();
+
+            Debug.Log("Points: " + pointSystem.points);
+            Debug.Log("Lives: " + pointSystem.lives);
+
+            manager.ShowAnswerFeedback(other.gameObject, true);
+            manager.GenerateQuestion();
+
+            StartCoroutine(DisableColliderTemporarily());
         }
+        else if (other.CompareTag("incorrect"))
+        {
+            canHit = false;
+
+            audioManager.PlayIncorrect();
+
+            Debug.Log("Incorrect");
+            pointSystem.loseLife();
+
+            if (pointSystem.lives < 0)
+                pointSystem.lives = 0;
+
+            Debug.Log("Points: " + pointSystem.points);
+            Debug.Log("Lives: " + pointSystem.lives);
+
+            manager.ShowAnswerFeedback(other.gameObject, false);
+            manager.GenerateQuestion();
+
+            StartCoroutine(DisableColliderTemporarily());
+        }
+    }
+
+    private IEnumerator DisableColliderTemporarily()
+    {
+        if (sphereCol != null)
+            sphereCol.enabled = false;
+
+        yield return new WaitForSeconds(hitCooldown);
+
+        if (sphereCol != null)
+            sphereCol.enabled = true;
+
+        canHit = true;
     }
 }
