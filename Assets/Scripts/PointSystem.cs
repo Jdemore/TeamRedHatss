@@ -27,15 +27,15 @@ public class PointSystem : MonoBehaviour
     {
         lives -= 1;
         if(lives == 0) {
-            Vector3 spawnPos = new Vector3(-1f, 5f, 20f);
-                GameObject instance = GameOverUI = Instantiate(GameOverUI, spawnPos, Quaternion.identity);
+            Vector3 spawnPos = new Vector3(-9f, 6f, 0f);
+            GameObject instance = GameOverUI = Instantiate(GameOverUI, spawnPos, Quaternion.identity);
 
-                SpawnIn spawnScript = instance.GetComponent<SpawnIn>();
-                if (spawnScript != null)
-                {
-                    spawnScript.target = targetPos;
-                    spawnScript.speed = 25f;
-                }
+            SpawnIn spawnScript = instance.GetComponent<SpawnIn>();
+            if (spawnScript != null)
+            {
+                spawnScript.target = targetPos;
+                spawnScript.speed = 25f;
+            }
         }
     }
 

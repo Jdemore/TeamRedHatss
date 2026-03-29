@@ -13,6 +13,8 @@ public class DictionaryManager : MonoBehaviour
     private int _currentTierIndex;
     private float _questionStartTime;
 
+    public PointSystem pointSystem;
+
     [SerializeField] private TextMeshProUGUI toFind;
     [Tooltip("Root transform of the toFind display object (the whole cube).")]
     [SerializeField] private Transform _toFindRoot;
@@ -126,6 +128,12 @@ public class DictionaryManager : MonoBehaviour
             kanaLib[e.kana] = e.romaji;
         }
         kanaKeys = new List<string>(kanaLib.Keys);
+    }
+
+    public void reset() 
+    {
+        pointSystem.lives = 3;
+        pointSystem.points = 0;
     }
 
     public void GenerateQuestion()
