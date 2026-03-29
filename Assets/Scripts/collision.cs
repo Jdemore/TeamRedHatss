@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 
 public class collision : MonoBehaviour
 {
@@ -6,6 +8,8 @@ public class collision : MonoBehaviour
     public DictionaryManager manager;
 
     public bool detect = true;
+
+    public AudioSource audioSource1;
 
     void OnTriggerEnter(Collider other) 
     {
@@ -45,15 +49,16 @@ public class collision : MonoBehaviour
         detect = true;
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
-        
+        audioSource1 = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (Keyboard.current.sKey.wasPressedThisFrame)
+        {
+            audioSource1.Play();
+        }
     }
 }
