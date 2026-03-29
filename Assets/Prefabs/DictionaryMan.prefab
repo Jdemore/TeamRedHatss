@@ -225,6 +225,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1896645196056565162}
   - {fileID: 1742723678949230067}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -240,7 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2008cae815362674ebff0d5a6f0cdab7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DictionaryManager
-  toFind: {fileID: 0}
+  toFind: {fileID: 1075703947551164600}
   _activeTiers: 1
   _includeAllUnlockedTiers: 0
   _choicePrefab: {fileID: 2996496245990384311, guid: c27e21bf9ec64854ca7d0ba21e5bf125, type: 3}
@@ -493,3 +494,80 @@ Transform:
   - {fileID: 6852355894098106617}
   m_Father: {fileID: 1742723678949230067}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &3977594265693058263
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6344454987846844990}
+    m_Modifications:
+    - target: {fileID: 2996496245990384311, guid: c27e21bf9ec64854ca7d0ba21e5bf125, type: 3}
+      propertyPath: m_Name
+      value: toFind
+      objectReference: {fileID: 0}
+    - target: {fileID: 3270031319255802237, guid: c27e21bf9ec64854ca7d0ba21e5bf125, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3270031319255802237, guid: c27e21bf9ec64854ca7d0ba21e5bf125, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3270031319255802237, guid: c27e21bf9ec64854ca7d0ba21e5bf125, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3270031319255802237, guid: c27e21bf9ec64854ca7d0ba21e5bf125, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3270031319255802237, guid: c27e21bf9ec64854ca7d0ba21e5bf125, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3270031319255802237, guid: c27e21bf9ec64854ca7d0ba21e5bf125, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3270031319255802237, guid: c27e21bf9ec64854ca7d0ba21e5bf125, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3270031319255802237, guid: c27e21bf9ec64854ca7d0ba21e5bf125, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3270031319255802237, guid: c27e21bf9ec64854ca7d0ba21e5bf125, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3270031319255802237, guid: c27e21bf9ec64854ca7d0ba21e5bf125, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6947351391235944189, guid: c27e21bf9ec64854ca7d0ba21e5bf125, type: 3}
+      propertyPath: m_Name
+      value: toFind
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c27e21bf9ec64854ca7d0ba21e5bf125, type: 3}
+--- !u!114 &1075703947551164600 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4170029667027663983, guid: c27e21bf9ec64854ca7d0ba21e5bf125, type: 3}
+  m_PrefabInstance: {fileID: 3977594265693058263}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!4 &1896645196056565162 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3270031319255802237, guid: c27e21bf9ec64854ca7d0ba21e5bf125, type: 3}
+  m_PrefabInstance: {fileID: 3977594265693058263}
+  m_PrefabAsset: {fileID: 0}
